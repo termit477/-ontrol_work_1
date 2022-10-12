@@ -6,3 +6,49 @@
 // ["hello", "2", "world", ":-)"] -> ["2", ":-)"]
 // ["1234", "1567", "-2", "computer science", -> ["-2"]
 // ["Russia", "Denmark", "Kazan"] -> []
+
+Console.Clear();
+
+string[] CreateArray()
+{
+    Console.Write("Введите количество вводимых строк: ");
+    int size = Convert.ToInt32(Console.ReadLine());
+    string[] array = new string[size];
+    for (int i = 0; i < size; i++)
+    {
+        Console.Write("Введите строку: ");
+        array[i] = Console.ReadLine();
+    }
+    return array;
+}
+void PrintArray(string[] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (i < array.Length - 1) Console.Write($"{array[i]}, ");
+        else Console.Write($"{array[i]}");
+    }
+    Console.WriteLine("]");
+}
+
+string[] SelectionArray(string[] array)
+{
+    int count = 0;
+    string[] resultArray = new string[0];
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= 3)
+        {
+            resultArray[count] = array[i];
+            count++;
+        }
+    }
+    return resultArray;
+}
+
+string[] mass = CreateArray();
+PrintArray(mass);
+
+string[] result = SelectionArray(mass);
+PrintArray(result);
