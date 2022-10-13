@@ -8,18 +8,20 @@
 // ["Russia", "Denmark", "Kazan"] -> []
 
 Console.Clear();
-int sizeFinalArray=0;
+
 string[] CreateArray()
 {
-    Console.Write("Введите количество вводимых строк: ");
-    int size = Convert.ToInt32(Console.ReadLine());
+    int size = default;
+    Console.Write("Введите размер массива: ");
+    while (!int.TryParse(Console.ReadLine(), out size))
+        Console.Write("Повторите попытку.\nВведите натуральное положительное целое число: ");
+
     string[] array = new string[size];
-    int sizeFinalArray = 0;
+
     for (int i = 0; i < size; i++)
     {
         Console.Write("Введите строку: ");
         array[i] = Console.ReadLine();
-        if (array[i].Length <= 3) sizeFinalArray++;
     }
     return array;
 }
@@ -34,10 +36,20 @@ void PrintArray(string[] array)
     Console.WriteLine("]");
 }
 
-string[] SelectionArray(string[] array, int sizeFinalArray)
+int FindSizeFinalArray(string[] array)
 {
     int count = 0;
-    string[] resultArray = new string [sizeFinalArray];
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (Convert.ToString(array[i]).Length <= 3) count++;
+    }
+    return count;
+}
+
+string[] SelectionArray(string[] array, int finalSizeArr, int count = 0)
+{
+
+    string[] resultArray = new string[finalSizeArr];
     for (int i = 0; i < array.Length; i++)
     {
         if (array[i].Length <= 3)
@@ -50,7 +62,11 @@ string[] SelectionArray(string[] array, int sizeFinalArray)
 }
 
 string[] mass = CreateArray();
+Console.Write($"Изначальный массив - ");
 PrintArray(mass);
 
-string[] result = SelectionArray(mass, sizeFinalArray);
+int finalSizeArray = FindSizeFinalArray(mass);
+
+Console.Write($"  Финальный массив - ");
+string[] result = SelectionArray(mass, finalSizeArray);
 PrintArray(result);
