@@ -8,16 +8,18 @@
 // ["Russia", "Denmark", "Kazan"] -> []
 
 Console.Clear();
-
+int sizeFinalArray=0;
 string[] CreateArray()
 {
     Console.Write("Введите количество вводимых строк: ");
     int size = Convert.ToInt32(Console.ReadLine());
     string[] array = new string[size];
+    int sizeFinalArray = 0;
     for (int i = 0; i < size; i++)
     {
         Console.Write("Введите строку: ");
         array[i] = Console.ReadLine();
+        if (array[i].Length <= 3) sizeFinalArray++;
     }
     return array;
 }
@@ -32,10 +34,10 @@ void PrintArray(string[] array)
     Console.WriteLine("]");
 }
 
-string[] SelectionArray(string[] array)
+string[] SelectionArray(string[] array, int sizeFinalArray)
 {
     int count = 0;
-    string[] resultArray = new string[0];
+    string[] resultArray = new string [sizeFinalArray];
     for (int i = 0; i < array.Length; i++)
     {
         if (array[i].Length <= 3)
@@ -50,5 +52,5 @@ string[] SelectionArray(string[] array)
 string[] mass = CreateArray();
 PrintArray(mass);
 
-string[] result = SelectionArray(mass);
+string[] result = SelectionArray(mass, sizeFinalArray);
 PrintArray(result);
